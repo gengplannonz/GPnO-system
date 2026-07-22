@@ -1,0 +1,323 @@
+/* ======================================================
+   GENG PLAN & ONZ
+   STYLE.CSS
+====================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
+}
+
+:root{
+
+    --primary:#0d6efd;
+    --primary-hover:#0b5ed7;
+
+    --sidebar:#1f2937;
+    --sidebar-hover:#374151;
+
+    --background:#f3f4f6;
+
+    --white:#ffffff;
+
+    --text:#333;
+
+    --border:#dddddd;
+
+    --shadow:0 3px 12px rgba(0,0,0,.15);
+
+}
+
+body{
+
+    background:var(--background);
+
+    overflow:hidden;
+
+}
+
+/* ============================
+        HEADER
+============================ */
+
+.header{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+    right:0;
+
+    height:60px;
+
+    background:var(--primary);
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 20px;
+
+    box-shadow:var(--shadow);
+
+    z-index:999;
+
+}
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.logo h2{
+
+    font-size:22px;
+
+    font-weight:600;
+
+}
+
+/* ============================
+        MENU BUTTON
+============================ */
+
+.menuBtn{
+
+    display:none;
+
+    cursor:pointer;
+
+    font-size:28px;
+
+    user-select:none;
+
+}
+
+/* ============================
+        SIDEBAR
+============================ */
+
+.sidebar{
+
+    position:fixed;
+
+    top:60px;
+
+    left:0;
+
+    width:250px;
+
+    height:calc(100vh - 60px);
+
+    background:var(--sidebar);
+
+    overflow-y:auto;
+
+    transition:.3s;
+
+}
+
+.sidebar a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    text-decoration:none;
+
+    color:white;
+
+    padding:16px 20px;
+
+    transition:.3s;
+
+    border-left:4px solid transparent;
+
+}
+
+.sidebar a:hover{
+
+    background:var(--sidebar-hover);
+
+    border-left:4px solid var(--primary);
+
+}
+
+.sidebar a.active{
+
+    background:var(--primary);
+
+    border-left:4px solid white;
+
+}
+
+/* ============================
+        CONTENT
+============================ */
+
+.content{
+
+    margin-left:250px;
+
+    margin-top:60px;
+
+    width:calc(100% - 250px);
+
+    height:calc(100vh - 60px);
+
+}
+
+.content iframe{
+
+    width:100%;
+
+    height:100%;
+
+    border:none;
+
+    background:white;
+
+}
+
+/* ============================
+        SCROLLBAR
+============================ */
+
+.sidebar::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+.sidebar::-webkit-scrollbar-thumb{
+
+    background:#666;
+
+    border-radius:20px;
+
+}
+
+.sidebar::-webkit-scrollbar-track{
+
+    background:#222;
+
+}
+
+/* ============================
+        MOBILE
+============================ */
+
+@media(max-width:768px){
+
+.menuBtn{
+
+    display:block;
+
+}
+
+.sidebar{
+
+    left:-260px;
+
+}
+
+.sidebar.show{
+
+    left:0;
+
+}
+
+.content{
+
+    margin-left:0;
+
+    width:100%;
+
+}
+
+}
+
+/* ============================
+        TABLET
+============================ */
+
+@media(min-width:769px) and (max-width:1024px){
+
+.sidebar{
+
+    width:220px;
+
+}
+
+.content{
+
+    margin-left:220px;
+
+    width:calc(100% - 220px);
+
+}
+
+}
+
+/* ============================
+        ANIMATION
+============================ */
+
+.sidebar,
+.content,
+.header{
+
+    transition:.3s;
+
+}
+
+.sidebar a{
+
+    transition:.25s;
+
+}
+
+/* ============================
+        LINK
+============================ */
+
+a{
+
+    -webkit-tap-highlight-color:transparent;
+
+}
+
+/* ============================
+        IFRAME
+============================ */
+
+iframe{
+
+    display:block;
+
+}
+
+/* ============================
+        SELECTION
+============================ */
+
+::selection{
+
+    background:var(--primary);
+
+    color:white;
+
+}
