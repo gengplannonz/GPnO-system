@@ -1,3 +1,6 @@
+
+<!DOCTYPE html>
+<html lang="ms">
 <head>
 
 <meta charset="UTF-8">
@@ -8,3 +11,128 @@
 <link rel="stylesheet" href="css/style.css">
 
 </head>
+
+<body>
+
+<!-- ===========================
+            HEADER
+=========================== -->
+
+<div class="header">
+
+    <div class="logo">
+
+        <div class="menuBtn" onclick="toggleMenu()">
+            ☰
+        </div>
+
+        <h2>
+            Geng Plan & Onz
+        </h2>
+
+    </div>
+
+    <div>
+
+        Bendahari
+
+    </div>
+
+</div>
+
+<!-- ===========================
+            SIDEBAR
+=========================== -->
+
+<div class="sidebar" id="sidebar">
+
+<a href="#" class="active"
+onclick="loadPage('pages/dashboard.html',this)">
+🏠 Dashboard
+</a>
+
+<a href="#"
+onclick="loadPage('pages/member.html',this)">
+👥 Ahli
+</a>
+
+<a href="#"
+onclick="loadPage('pages/payment.html',this)">
+💰 Pembayaran
+</a>
+
+<a href="#"
+onclick="loadPage('pages/resit.html',this)">
+🧾 Resit
+</a>
+
+<a href="#"
+onclick="loadPage('pages/report.html',this)">
+📊 Laporan
+</a>
+
+<a href="#"
+onclick="loadPage('pages/setting.html',this)">
+⚙️ Tetapan
+</a>
+
+</div>
+
+<!-- ===========================
+            CONTENT
+=========================== -->
+
+<div class="content">
+
+<iframe
+
+id="mainFrame"
+
+src="pages/dashboard.html"
+
+name="mainFrame">
+
+</iframe>
+
+</div>
+
+<script>
+
+function loadPage(page,obj){
+
+document.getElementById("mainFrame").src=page;
+
+let menu=document.querySelectorAll(".sidebar a");
+
+menu.forEach(x=>x.classList.remove("active"));
+
+obj.classList.add("active");
+
+if(window.innerWidth<=768){
+
+document.getElementById("sidebar").classList.remove("show");
+
+}
+
+}
+
+function toggleMenu(){
+
+document.getElementById("sidebar").classList.toggle("show");
+
+}
+
+window.addEventListener("resize",function(){
+
+if(window.innerWidth>768){
+
+document.getElementById("sidebar").classList.remove("show");
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
