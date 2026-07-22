@@ -1,261 +1,305 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ms">
 <head>
 
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Geng Plan & Onz</title>
+<title>Geng Plan & Onz</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
 
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI,Arial,sans-serif;
+}
 
-    <style>
+body{
+    background:#f2f4f8;
+    overflow:hidden;
+}
 
-        body{
-            background:#f5f6fa;
-        }
+/* ======================
+        TOP BAR
+====================== */
 
-        .sidebar{
-            width:250px;
-            min-height:100vh;
-            background:#0d6efd;
-        }
+.header{
 
-        .sidebar a{
-            color:white;
-            text-decoration:none;
-            display:block;
-            padding:15px 20px;
-        }
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
 
-        .sidebar a:hover{
-            background:rgba(255,255,255,.15);
-        }
+    height:60px;
 
-        .card{
-            border:none;
-            border-radius:15px;
-        }
+    background:#0d6efd;
+    color:white;
 
-        .card h2{
-            font-weight:bold;
-        }
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 
-        .topbar{
-            background:white;
-            height:70px;
-            border-bottom:1px solid #ddd;
-        }
+    padding:0 20px;
 
-    </style>
+    z-index:999;
+
+}
+
+.logo{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+}
+
+.logo h2{
+
+    font-size:22px;
+
+}
+
+.menuBtn{
+
+    display:none;
+
+    font-size:28px;
+
+    cursor:pointer;
+
+}
+
+/* ======================
+        SIDEBAR
+====================== */
+
+.sidebar{
+
+    position:fixed;
+
+    top:60px;
+    left:0;
+
+    width:250px;
+    height:calc(100vh - 60px);
+
+    background:#1f2937;
+
+    overflow:auto;
+
+    transition:.3s;
+
+}
+
+.sidebar a{
+
+    display:block;
+
+    padding:16px 20px;
+
+    color:white;
+
+    text-decoration:none;
+
+    transition:.2s;
+
+}
+
+.sidebar a:hover{
+
+    background:#0d6efd;
+
+}
+
+.sidebar a.active{
+
+    background:#0d6efd;
+
+}
+
+/* ======================
+        CONTENT
+====================== */
+
+.content{
+
+    margin-left:250px;
+    margin-top:60px;
+
+    height:calc(100vh - 60px);
+
+}
+
+.content iframe{
+
+    width:100%;
+    height:100%;
+
+    border:none;
+
+    background:white;
+
+}
+
+/* ======================
+        MOBILE
+====================== */
+
+@media(max-width:768px){
+
+.sidebar{
+
+    left:-260px;
+
+}
+
+.sidebar.show{
+
+    left:0;
+
+}
+
+.content{
+
+    margin-left:0;
+
+}
+
+.menuBtn{
+
+    display:block;
+
+}
+
+}
+
+</style>
 
 </head>
 
 <body>
 
-<div class="container-fluid">
+<!-- ===========================
+            HEADER
+=========================== -->
 
-<div class="row">
+<div class="header">
 
-    <!-- Sidebar -->
+    <div class="logo">
 
-    <div class="col-md-2 p-0 sidebar">
+        <div class="menuBtn" onclick="toggleMenu()">
+            ☰
+        </div>
 
-        <h3 class="text-center text-white py-4">
-            GPO
-        </h3>
-
-        <a href="#">
-            <i class="bi bi-speedometer2"></i>
-            Dashboard
-        </a>
-
-        <a href="#">
-            <i class="bi bi-people-fill"></i>
-            Ahli
-        </a>
-
-        <a href="#">
-            <i class="bi bi-wallet2"></i>
-            Pembayaran
-        </a>
-
-        <a href="#">
-            <i class="bi bi-receipt"></i>
-            Resit
-        </a>
-
-        <a href="#">
-            <i class="bi bi-bar-chart-fill"></i>
-            Laporan
-        </a>
-
-        <a href="#">
-            <i class="bi bi-gear-fill"></i>
-            Tetapan
-        </a>
+        <h2>
+            Geng Plan & Onz
+        </h2>
 
     </div>
 
-    <!-- Content -->
+    <div>
 
-    <div class="col-md-10 p-0">
-
-        <!-- Topbar -->
-
-        <div class="topbar d-flex align-items-center justify-content-between px-4">
-
-            <h4>
-                Dashboard
-            </h4>
-
-            <span>
-                Bendahari
-            </span>
-
-        </div>
-
-        <div class="container py-4">
-
-            <div class="row g-4">
-
-                <div class="col-md-3">
-
-                    <div class="card shadow">
-
-                        <div class="card-body">
-
-                            <h6>Jumlah Ahli</h6>
-
-                            <h2 id="totalMember">
-                                0
-                            </h2>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-md-3">
-
-                    <div class="card shadow">
-
-                        <div class="card-body">
-
-                            <h6>Dah Bayar</h6>
-
-                            <h2 id="paidMember">
-                                0
-                            </h2>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-md-3">
-
-                    <div class="card shadow">
-
-                        <div class="card-body">
-
-                            <h6>Belum Bayar</h6>
-
-                            <h2 id="unpaidMember">
-                                0
-                            </h2>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="col-md-3">
-
-                    <div class="card shadow">
-
-                        <div class="card-body">
-
-                            <h6>Jumlah Kutipan</h6>
-
-                            <h2 id="totalPayment">
-                                RM0
-                            </h2>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="card shadow mt-4">
-
-                <div class="card-header">
-
-                    Aktiviti Terkini
-
-                </div>
-
-                <div class="card-body">
-
-                    <table class="table table-striped">
-
-                        <thead>
-
-                        <tr>
-
-                            <th>Tarikh</th>
-
-                            <th>Nama</th>
-
-                            <th>Bayaran</th>
-
-                            <th>Status</th>
-
-                        </tr>
-
-                        </thead>
-
-                        <tbody id="recentPayment">
-
-                            <tr>
-
-                                <td colspan="4" class="text-center">
-
-                                    Tiada rekod
-
-                                </td>
-
-                            </tr>
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-            </div>
-
-        </div>
+        Bendahari
 
     </div>
 
 </div>
 
+<!-- ===========================
+            SIDEBAR
+=========================== -->
+
+<div class="sidebar" id="sidebar">
+
+<a href="#" class="active"
+onclick="loadPage('pages/dashboard.html',this)">
+🏠 Dashboard
+</a>
+
+<a href="#"
+onclick="loadPage('pages/member.html',this)">
+👥 Ahli
+</a>
+
+<a href="#"
+onclick="loadPage('pages/payment.html',this)">
+💰 Pembayaran
+</a>
+
+<a href="#"
+onclick="loadPage('pages/resit.html',this)">
+🧾 Resit
+</a>
+
+<a href="#"
+onclick="loadPage('pages/report.html',this)">
+📊 Laporan
+</a>
+
+<a href="#"
+onclick="loadPage('pages/setting.html',this)">
+⚙️ Tetapan
+</a>
+
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- ===========================
+            CONTENT
+=========================== -->
+
+<div class="content">
+
+<iframe
+
+id="mainFrame"
+
+src="pages/dashboard.html"
+
+name="mainFrame">
+
+</iframe>
+
+</div>
+
+<script>
+
+function loadPage(page,obj){
+
+document.getElementById("mainFrame").src=page;
+
+let menu=document.querySelectorAll(".sidebar a");
+
+menu.forEach(x=>x.classList.remove("active"));
+
+obj.classList.add("active");
+
+if(window.innerWidth<=768){
+
+document.getElementById("sidebar").classList.remove("show");
+
+}
+
+}
+
+function toggleMenu(){
+
+document.getElementById("sidebar").classList.toggle("show");
+
+}
+
+window.addEventListener("resize",function(){
+
+if(window.innerWidth>768){
+
+document.getElementById("sidebar").classList.remove("show");
+
+}
+
+});
+
+</script>
 
 </body>
-
 </html>
