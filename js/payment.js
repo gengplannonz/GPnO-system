@@ -1,0 +1,1 @@
+const data=[];const tb=document.getElementById('paymentTable');function render(){tb.innerHTML='';data.forEach(r=>tb.innerHTML+=`<tr><td>${r.id}</td><td>${r.member}</td><td>${r.tarikh}</td><td>${r.jumlah}</td><td>${r.kaedah}</td></tr>`)}render();
