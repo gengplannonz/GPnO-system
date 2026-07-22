@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ms">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ahli</title>
+
+    <link rel="stylesheet" href="../css/member.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- ========================= -->
+    <!-- Header -->
+    <!-- ========================= -->
+
+    <div class="header">
+
+        <div>
+
+            <h1>👥 Senarai Ahli</h1>
+
+            <p>
+                Pengurusan Ahli Geng Plan & Onz
+            </p>
+
+        </div>
+
+        <button id="btnAdd">
+
+            + Tambah Ahli
+
+        </button>
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- Search -->
+    <!-- ========================= -->
+
+    <div class="toolbar">
+
+        <input
+            type="text"
+            id="txtSearch"
+            placeholder="Cari nama atau telefon..."
+        >
+
+    </div>
+
+    <!-- ========================= -->
+    <!-- Table -->
+    <!-- ========================= -->
+
+    <div class="tableBox">
+
+        <table>
+
+            <thead>
+
+            <tr>
+
+                <th width="80">ID</th>
+
+                <th>Nama</th>
+
+                <th width="170">Telefon</th>
+
+                <th width="120">Program</th>
+
+                <th width="120">Jumlah</th>
+
+                <th width="120">Bayar</th>
+
+                <th width="120">Baki</th>
+
+                <th width="120">Status</th>
+
+                <th width="180">Tindakan</th>
+
+            </tr>
+
+            </thead>
+
+            <tbody id="memberTable">
+
+                <!-- Data akan dimasukkan oleh member.js -->
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- ===================================== -->
+<!-- MODAL -->
+<!-- ===================================== -->
+
+<div class="modal" id="memberModal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+
+                Tambah Ahli
+
+            </h2>
+
+            <span id="closeModal">
+
+                &times;
+
+            </span>
+
+        </div>
+
+        <div class="modal-body">
+
+            <input
+                type="hidden"
+                id="memberID"
+            >
+
+            <div class="form-group">
+
+                <label>
+
+                    Nama
+
+                </label>
+
+                <input
+                    type="text"
+                    id="txtNama"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+
+                    Telefon
+
+                </label>
+
+                <input
+                    type="text"
+                    id="txtTelefon"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+
+                    Program
+
+                </label>
+
+                <input
+                    type="text"
+                    id="txtProgram"
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+
+                    Jumlah Perlu Bayar
+
+                </label>
+
+                <input
+                    type="number"
+                    id="txtJumlah"
+                >
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button
+                class="btnCancel"
+                id="btnCancel"
+            >
+
+                Batal
+
+            </button>
+
+            <button
+                class="btnSave"
+                id="btnSave"
+            >
+
+                Simpan
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ===================================== -->
+<!-- DELETE MODAL -->
+<!-- ===================================== -->
+
+<div class="modal" id="deleteModal">
+
+    <div class="delete-box">
+
+        <h2>
+
+            Padam Ahli
+
+        </h2>
+
+        <p>
+
+            Adakah anda pasti ingin memadam rekod ini?
+
+        </p>
+
+        <div class="delete-button">
+
+            <button id="btnDeleteCancel">
+
+                Tidak
+
+            </button>
+
+            <button id="btnDeleteYes">
+
+                Ya, Padam
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ===================================== -->
+<!-- Loading -->
+<!-- ===================================== -->
+
+<div id="loading">
+
+    <div class="spinner"></div>
+
+    <p>
+
+        Sila Tunggu...
+
+    </p>
+
+</div>
+
+<!-- ===================================== -->
+<!-- Empty Data -->
+<!-- ===================================== -->
+
+<template id="emptyRow">
+
+<tr>
+
+    <td colspan="9" class="empty">
+
+        Tiada rekod dijumpai
+
+    </td>
+
+</tr>
+
+</template>
+
+<!-- ===================================== -->
+<!-- Template Row -->
+<!-- ===================================== -->
+
+<template id="rowTemplate">
+
+<tr>
+
+    <td class="id"></td>
+
+    <td class="nama"></td>
+
+    <td class="telefon"></td>
+
+    <td class="program"></td>
+
+    <td class="jumlah"></td>
+
+    <td class="bayar"></td>
+
+    <td class="baki"></td>
+
+    <td class="status"></td>
+
+    <td>
+
+        <button class="edit">
+
+            Edit
+
+        </button>
+
+        <button class="delete">
+
+            Padam
+
+        </button>
+
+    </td>
+
+</tr>
+
+</template>
+
+<script src="../js/member.js"></script>
+
+</body>
+
+</html>
