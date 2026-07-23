@@ -538,8 +538,18 @@ async function saveMember(){
 
             },
 
-            body:JSON.stringify(payload)
+const form=new URLSearchParams();
 
+form.append("action","addMember");
+
+form.append("nama",nama);
+
+...
+
+fetch(API,{
+    method:"POST",
+    body:form
+});
         });
 
         const result=await response.json();
