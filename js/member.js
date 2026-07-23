@@ -573,3 +573,380 @@ async function saveMember(){
     }
 
 }
+
+
+/* ==========================================
+   EDIT MEMBER
+========================================== */
+
+function editMember(id){
+
+    selectedID=id;
+
+    const member=getMemberByID(id);
+
+    if(!member){
+
+        alert("Rekod tidak dijumpai.");
+
+        return;
+
+    }
+
+    memberID.value=member.id;
+
+    txtNama.value=member.nama;
+
+    txtTelefon.value=member.telefon;
+
+    txtProgram.value=member.program;
+
+    txtJumlah.value=member.jumlah;
+
+    modalTitle.innerHTML="Edit Ahli";
+
+    modal.style.display="flex";
+
+}
+
+/* ==========================================
+   UPDATE BUTTON
+========================================== */
+
+function setEditMode(id){
+
+    editMember(id);
+
+}
+
+/* ==========================================
+   RESET MODE
+========================================== */
+
+function resetMode(){
+
+    selectedID="";
+
+}
+
+/* ==========================================
+   AFTER SAVE
+========================================== */
+
+function afterSave(){
+
+    resetMode();
+
+    closeMemberModal();
+
+    loadMembers();
+
+}
+
+/* ==========================================
+   ESC KEY CLOSE MODAL
+========================================== */
+
+document.addEventListener("keydown",function(e){
+
+    if(e.key==="Escape"){
+
+        closeMemberModal();
+
+    }
+
+});
+
+/* ==========================================
+   DOUBLE CLICK ROW = EDIT
+========================================== */
+
+tbody.addEventListener("dblclick",function(e){
+
+    const row=e.target.closest("tr");
+
+    if(!row) return;
+
+    const id=row.cells[0].innerText;
+
+    if(id!=""){
+
+        editMember(id);
+
+    }
+
+});
+
+/* ==========================================
+   DELETE MEMBER
+========================================== */
+
+function deleteMember(id){
+
+    selectedID=id;
+
+    deleteModal.style.display="flex";
+
+}
+
+/* ==========================================
+   CANCEL DELETE
+========================================== */
+
+btnDeleteCancel.onclick=function(){
+
+    deleteModal.style.display="none";
+
+    selectedID="";
+
+}
+
+/* ==========================================
+   CONFIRM DELETE
+========================================== */
+
+btnDeleteYes.onclick=async function(){
+
+    if(selectedID=="") return;
+
+    showLoading();
+
+    try{
+
+        const formData=new URLSearchParams();
+
+        formData.append("action","deleteMember");
+
+        formData.append("id",selectedID);
+
+        const response=await fetch(API,{
+
+            method:"POST",
+
+            body:formData
+
+        });
+
+        const result=await response.json();
+
+        hideLoading();
+
+        deleteModal.style.display="none";
+
+        if(result.status=="success"){
+
+            selectedID="";
+
+            await loadMembers();
+
+            alert("Rekod berjaya dipadam.");
+
+        }else{
+
+            alert(result.message);
+
+        }
+
+    }
+
+    catch(err){
+
+        hideLoading();
+
+        deleteModal.style.display="none";
+
+        console.log(err);
+
+        alert("Tidak dapat sambung ke Server.");
+
+    }
+
+}
+
+/* ==========================================
+   DELETE BY KEYBOARD
+========================================== */
+
+document.addEventListener("keydown",function(e){
+
+    if(e.key=="Delete"){
+
+        if(selectedID!=""){
+
+            deleteMember(selectedID);
+
+        }
+
+    }
+
+});
+
+/* ==========================================
+   TOAST NOTIFICATION
+========================================== */
+
+function showToast(message,type="success"){
+
+    let toast=document.getElementById("toast");
+
+    if(!toast){
+
+        toast=document.createElement("div");
+
+        toast.id="toast";
+
+        document.body.appendChild(toast);
+
+    }
+
+    toast.className="toast "+type;
+
+    toast.innerHTML=message;
+
+    toast.style.display="block";
+
+    setTimeout(()=>{
+
+        toast.classList.add("show");
+
+    },100);
+
+    setTimeout(()=>{
+
+        toast.classList.remove("show");
+
+        setTimeout(()=>{
+
+            toast.style.display="none";
+
+        },300);
+
+    },3000);
+
+}
+
+/* ==========================================
+   PHONE VALIDATION
+========================================== */
+
+function validPhone(phone){
+
+    phone=phone.replace(/\s/g,'');
+
+    const regex=/^(01)[0-9]{8,9}$/;
+
+    return regex.test(phone);
+
+}
+
+/* ==========================================
+   MONEY VALIDATION
+========================================== */
+
+function validAmount(value){
+
+    value=Number(value);
+
+    if(isNaN(value)) return false;
+
+    if(value<=0) return false;
+
+    return true;
+
+}
+
+/* ==========================================
+   RESET FORM
+========================================== */
+
+function resetForm(){
+
+    selectedID="";
+
+    memberID.value="";
+
+    txtNama.value="";
+
+    txtTelefon.value="";
+
+    txtProgram.value="";
+
+    txtJumlah.value="";
+
+}
+
+/* ==========================================
+   AUTO REFRESH
+========================================== */
+
+function autoRefresh(){
+
+    loadMembers();
+
+}
+
+/* refresh setiap 60 saat */
+
+setInterval(autoRefresh,60000);
+
+/* ==========================================
+   FORMAT DATE
+========================================== */
+
+function today(){
+
+    const d=new Date();
+
+    return d.toLocaleDateString("ms-MY");
+
+}
+
+/* ==========================================
+   CAPITALIZE
+========================================== */
+
+function capitalize(text){
+
+    return text.replace(/\b\w/g,l=>l.toUpperCase());
+
+}
+
+/* ==========================================
+   INPUT EVENT
+========================================== */
+
+txtNama.addEventListener("blur",()=>{
+
+    txtNama.value=capitalize(txtNama.value.trim());
+
+});
+
+txtProgram.addEventListener("blur",()=>{
+
+    txtProgram.value=capitalize(txtProgram.value.trim());
+
+});
+
+/* ==========================================
+   ENTER KEY
+========================================== */
+
+document.addEventListener("keypress",function(e){
+
+    if(e.key==="Enter"){
+
+        if(modal.style.display==="flex"){
+
+            saveMember();
+
+        }
+
+    }
+
+});
+
+/* ==========================================
+   END MEMBER.JS
+========================================== */
+
+console.log("Member.js Loaded Successfully");
