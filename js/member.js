@@ -512,22 +512,6 @@ async function saveMember(){
 
     }
 
-    const payload={
-
-        action:action,
-
-        id:selectedID,
-
-        nama:nama,
-
-        telefon:telefon,
-
-        program:program,
-
-        jumlah:jumlah
-
-    };
-
     try{
 
     const form = new URLSearchParams();
@@ -570,7 +554,7 @@ catch(err){
     console.log(err);
 
     showToast("Ralat sambungan ke Server.","error");
-
+}
 }
 
 /* ==========================================
@@ -945,6 +929,6 @@ document.addEventListener("keypress",function(e){
 
 /* ==========================================
    END MEMBER.JS
-========================================== *
+========================================== */
 
-console.log("Member.js Loaded Successfully");*/
+console.log("Member.js Loaded Successfully");
