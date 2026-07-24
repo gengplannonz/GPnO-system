@@ -945,6 +945,6 @@ document.addEventListener("keypress",function(e){
 
 /* ==========================================
    END MEMBER.JS
-========================================== */
+========================================== *
 
-console.log("Member.js Loaded Successfully");
+console.log("Member.js Loaded Successfully");*/
