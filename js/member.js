@@ -530,62 +530,48 @@ async function saveMember(){
 
     try{
 
-        const response=await fetch(API,{
+    const form = new URLSearchParams();
 
-            method:"POST",
+    form.append("action", action);
+    form.append("id", selectedID);
+    form.append("nama", nama);
+    form.append("telefon", telefon);
+    form.append("program", program);
+    form.append("jumlah", jumlah);
 
-            headers:{
+    const response = await fetch(API,{
+        method:"POST",
+        body:form
+    });
 
-                "Content-Type":"application/json"
+    const result = await response.json();
 
-            },
+    hideLoading();
 
-const form=new URLSearchParams();
+    if(result.status=="success"){
 
-form.append("action","addMember");
+        closeMemberModal();
 
-form.append("nama",nama);
+        await loadMembers();
 
-...
+        showToast(result.message);
 
-fetch(API,{
-    method:"POST",
-    body:form
-});
-        });
+    }else{
 
-        const result=await response.json();
-
-        hideLoading();
-
-        if(result.status=="success"){
-
-            closeMemberModal();
-
-            await loadMembers();
-
-            alert(result.message);
-
-        }else{
-
-            alert(result.message);
-
-        }
-
-    }
-
-    catch(err){
-
-        hideLoading();
-
-        console.log(err);
-
-        alert("Ralat sambungan ke Google Apps Script.");
+        showToast(result.message,"error");
 
     }
 
 }
+catch(err){
 
+    hideLoading();
+
+    console.log(err);
+
+    showToast("Ralat sambungan ke Server.","error");
+
+}
 
 /* ==========================================
    EDIT MEMBER
