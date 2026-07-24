@@ -71,22 +71,24 @@ function hideLoading(){
    LOAD MEMBERS FROM GOOGLE APPS SCRIPT
 ========================================== */
 
-async function loadMembers() {
+async function loadMembers(){
 
     showLoading();
 
-    try {
+    try{
 
+        console.log("Calling API...");
         const response = await fetch(API + "?action=getMembers");
 
-        const result = await response.json();
-               console.log(result); // <-- TAMBAH INI
+        console.log("Response =", response);
 
+        const result = await response.json();
+
+        console.log("Result =", result);
 
         if(result.status=="success"){
 
             members=result.data;
-
             renderTable(members);
 
         }else{
@@ -95,16 +97,17 @@ async function loadMembers() {
 
         }
 
+    }catch(err){
+
+        console.error(err);
+
+        alert(err);
+
+    }finally{
+
+        hideLoading();
+
     }
-    catch(err){
-
-        console.log(err);
-
-        alert("Tidak dapat sambung ke Server.");
-
-    }
-
-    hideLoading();
 
 }
 
