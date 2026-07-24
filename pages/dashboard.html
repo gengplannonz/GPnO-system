@@ -281,7 +281,7 @@ Selamat datang ke Sistem Bendahari Geng Plan & Onz
 
 </thead>
 
-<tbody id="paymentTable">
+<tbody id="memberTableBody">
 
 <tr>
 
@@ -393,6 +393,83 @@ document.getElementById("unpaidMember").innerHTML=dashboard.unpaid;
 document.getElementById("totalAmount").innerHTML=
 "RM "+dashboard.amount.toLocaleString("ms-MY");
 
+
+    function renderTable(data){
+
+    const tbody = document.getElementById("memberTableBody");
+
+    tbody.innerHTML = "";
+
+    if(!data || data.length===0){
+
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="9" style="text-align:center;padding:25px;">
+                    Tiada rekod ahli.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+    data.forEach((m,index)=>{
+
+        let badge="";
+
+        switch(m.status){
+
+            case "Paid":
+                badge='<span class="badge green">Paid</span>';
+                break;
+
+            case "Partial":
+                badge='<span class="badge orange">Partial</span>';
+                break;
+
+            default:
+                badge='<span class="badge red">Belum</span>';
+        }
+
+        tbody.innerHTML += `
+        <tr>
+
+            <td>${m.id}</td>
+
+            <td>${m.nama}</td>
+
+            <td>${m.telefon}</td>
+
+            <td>${m.program}</td>
+
+            <td>RM ${Number(m.jumlah).toFixed(2)}</td>
+
+            <td>RM ${Number(m.bayar).toFixed(2)}</td>
+
+            <td>RM ${Number(m.baki).toFixed(2)}</td>
+
+            <td>${badge}</td>
+
+            <td>
+
+                <button class="btn-edit"
+                    onclick="editMember('${m.id}')">
+                    Edit
+                </button>
+
+                <button class="btn-delete"
+                    onclick="deleteMemberConfirm('${m.id}')">
+                    Delete
+                </button>
+
+            </td>
+
+        </tr>
+        `;
+
+    });
+
+}
 </script>
 <script src="../js/api.js"></script>
 
