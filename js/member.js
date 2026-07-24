@@ -80,6 +80,8 @@ async function loadMembers() {
         const response = await fetch(API + "?action=getMembers");
 
         const result = await response.json();
+               console.log(result); // <-- TAMBAH INI
+
 
         if(result.status=="success"){
 
