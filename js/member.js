@@ -872,7 +872,7 @@ function autoRefresh(){
 
 /* refresh setiap 60 saat */
 
-setInterval(autoRefresh,60000);
+//setInterval(autoRefresh,60000);
 
 /* ==========================================
    FORMAT DATE
