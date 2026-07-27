@@ -224,7 +224,7 @@ async function apiPost(action, data = {}) {
    REQUEST TIMEOUT
 ============================================================ */
 
-const API_TIMEOUT = 30000;
+const API_TIMEOUT = 15000;
 
 /* ============================================================
    FETCH WITH TIMEOUT
@@ -331,8 +331,15 @@ function apiError(err) {
 
     }
 
+if(typeof showError==="function"){
+
+    showError(message);
+
+}else{
+
     alert(message);
 
+}
     return {
 
         status: "error",
