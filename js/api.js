@@ -212,18 +212,11 @@ async function apiPost(action, data = {}) {
 
     catch (err) {
 
-        apiLoading(false);
+    apiLoading(false);
 
-return apiError(err);
-        return {
+    return apiError(err);
 
-            status: "error",
-
-            message: err.message
-
-        };
-
-    }
+}
 
 }
 
