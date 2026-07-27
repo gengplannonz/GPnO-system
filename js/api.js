@@ -205,7 +205,7 @@ async function apiPost(action, data = {}) {
         }
 
         const result = await response.json();
-
+        apiLoading(false);
         return checkResponse(result);
 
     }
@@ -276,15 +276,19 @@ async function fetchTimeout(url, option = {}) {
    SHOW LOADING
 ============================================================ */
 
-function apiLoading(show = true) {
+function apiLoading(show = true){
 
-    if (typeof showLoading === "function") {
+    if(show){
 
-        if (show) {
+        if(typeof showLoading==="function"){
 
             showLoading();
 
-        } else {
+        }
+
+    }else{
+
+        if(typeof hideLoading==="function"){
 
             hideLoading();
 
@@ -293,7 +297,6 @@ function apiLoading(show = true) {
     }
 
 }
-
 /* ============================================================
    API ERROR
 ============================================================ */
