@@ -453,7 +453,7 @@ function calculateProgress(total, collected) {
 
     }
 
-    let percent = Math.round2(
+    let percent = Math.round(
 
         (collected / total) * 100
 
