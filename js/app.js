@@ -102,7 +102,7 @@ document.addEventListener("keydown", function (e) {
 
 window.onload = function () {
 
-    frame.src = "pages/dashboard.html";
+    frame.src = "../pages/dashboard.html";
 
 };
 
