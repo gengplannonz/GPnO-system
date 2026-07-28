@@ -227,7 +227,7 @@ async function apiPost(action, data = {}) {
    REQUEST TIMEOUT
 ============================================================ */
 
-const API_TIMEOUT = 15000;
+const API_TIMEOUT = 10000;
 
 /* ============================================================
    FETCH WITH TIMEOUT
